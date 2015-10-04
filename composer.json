@@ -1,0 +1,13 @@
+{
+    "name": "cromwell/iso3166",
+    "description": "A simple package for working with ISO-3166 country codes",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cromwell\\ISO3166\\": "src/"
+        }
+    }
+}
