@@ -4,11 +4,13 @@ use Cromwell\ISO3166\CodesByName;
 
 class CountriesTest extends PHPUnit_Framework_TestCase
 {
+    
+    const TOTAL_COUNTRIES = 246;
 
     public function testCountries()
     {
         $countries = new \Cromwell\ISO3166\Countries();
-        $this->assertCount(245, $countries);
+        $this->assertCount(self::TOTAL_COUNTRIES, $countries);
 
         $austria = $countries[CodesByName::AUSTRIA];
         $this->assertNotNull($austria);
@@ -26,7 +28,7 @@ class CountriesTest extends PHPUnit_Framework_TestCase
         $this->assertNull($countries['123']);
 
         $forJson = $countries->jsonSerialize();
-        $this->assertCount(245, $forJson);
+        $this->assertCount(self::TOTAL_COUNTRIES, $forJson);
 
         $countries = new \Cromwell\ISO3166\Countries([CodesByName::AUSTRIA]);
         $this->assertEquals(1, count($countries));
