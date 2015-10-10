@@ -119,6 +119,7 @@ interface CodesByName
     const JORDAN = 'JO';
     const JAPAN = 'JP';
     const KENYA = 'KE';
+    const KOSOVO = 'XK';
     const KYRGYZSTAN = 'KG';
     const CAMBODIA = 'KH';
     const KIRIBATI = 'KI';

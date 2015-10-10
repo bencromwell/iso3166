@@ -126,6 +126,7 @@ class Countries implements CodesByName, \ArrayAccess, \Countable, \JsonSerializa
         ['code' => self::JORDAN, 'name' => 'Jordan'],
         ['code' => self::JAPAN, 'name' => 'Japan'],
         ['code' => self::KENYA, 'name' => 'Kenya'],
+        ['code' => self::KOSOVO, 'name' => 'Kosovo'],
         ['code' => self::KYRGYZSTAN, 'name' => 'Kyrgyzstan'],
         ['code' => self::CAMBODIA, 'name' => 'Cambodia'],
         ['code' => self::KIRIBATI, 'name' => 'Kiribati'],
