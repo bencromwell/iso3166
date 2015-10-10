@@ -2,12 +2,16 @@
 
 namespace Cromwell\ISO3166;
 
-use Illuminate\Support\Collection;
-
-class Countries extends Collection implements CodesByName
+class Countries implements CodesByName, \ArrayAccess, \Countable, \JsonSerializable
 {
 
-    protected $countries = [
+    /** @var Country[] */
+    protected $selectedCountries = [];
+
+    /** @var Country[] */
+    protected $worldCountries = [];
+
+    private $worldCountriesRaw = [
         ['code' => self::ANDORRA, 'name' => 'Andorra'],
         ['code' => self::UNITED_ARAB_EMIRATES, 'name' => 'United Arab Emirates'],
         ['code' => self::AFGHANISTAN, 'name' => 'Afghanistan'],
@@ -256,52 +260,90 @@ class Countries extends Collection implements CodesByName
     ];
 
     /**
-     * @param array $items
+     * @param array $items - array of country codes
      */
     public function __construct($items = [])
     {
-        parent::__construct(empty($items) ? $this->countries : $items);
+        array_walk($this->worldCountriesRaw, function ($item) {
+            $this->worldCountries[$item['code']] = new Country($item['code'], $item['name']);
+        });
+
+        if (empty($items)) {
+            $items = array_map(function ($item) {
+                return $item['code'];
+            }, $this->worldCountriesRaw);
+        }
+
+        $this->initSubset($items);
     }
 
     /**
-     * @return Collection
+     * @param mixed $offset country code
+     * @return boolean true on success or false on failure.
      */
-    public function eu()
+    public function offsetExists($offset)
     {
-        $euCodes = [
-            self::AUSTRIA,
-            self::BELGIUM,
-            self::BULGARIA,
-            self::CYPRUS,
-            self::CZECH_REPUBLIC,
-            self::GERMANY,
-            self::DENMARK,
-            self::ESTONIA,
-            self::SPAIN,
-            self::FINLAND,
-            self::FRANCE,
-            self::UNITED_KINGDOM,
-            self::GREECE,
-            self::HUNGARY,
-            self::CROATIA,
-            self::IRELAND,
-            self::ITALY,
-            self::LITHUANIA,
-            self::LUXEMBOURG,
-            self::LATVIA,
-            self::MALTA,
-            self::NETHERLANDS,
-            self::POLAND,
-            self::PORTUGAL,
-            self::ROMANIA,
-            self::SLOVENIA,
-            self::SLOVAKIA,
-            self::SWEDEN,
-        ];
+        return isset($this->selectedCountries[$offset]);
+    }
 
-        return $this->filter(function ($item) use ($euCodes) {
-            return in_array($item['code'], $euCodes);
+    /**
+     * @param string $offset country code
+     * @return Country|null
+     */
+    public function offsetGet($offset)
+    {
+        if ($this->offsetExists($offset)) {
+            return $this->selectedCountries[$offset];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $offset  country code
+     * @param Country $value  country model
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->selectedCountries[$offset] = $value;
+    }
+
+    /**
+     * @param string $offset country code
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->selectedCountries[$offset]);
+    }
+
+    /**
+     * @return int number of countries in the selection
+     */
+    public function count()
+    {
+        return count($this->selectedCountries);
+    }
+
+    /**
+     * @param $countryCodes
+     */
+    protected function initSubset($countryCodes)
+    {
+        array_walk($countryCodes, function($code) {
+            $this->selectedCountries[$code] = $this->worldCountries[$code];
         });
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    public function jsonSerialize()
+    {
+        return $this->selectedCountries;
     }
 
 }
