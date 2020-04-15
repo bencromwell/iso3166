@@ -1,10 +1,10 @@
 <?php
 
 use Cromwell\ISO3166\CodesByName;
+use PHPUnit\Framework\TestCase;
 
-class CountryTest extends PHPUnit_Framework_TestCase
+class CountryTest extends TestCase
 {
-
     public function testConstruct()
     {
         $country = new \Cromwell\ISO3166\Country(CodesByName::AUSTRIA, 'Austria');
@@ -24,4 +24,9 @@ class CountryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('{"code":"AT","name":"Austria"}', json_encode($country));
     }
 
+    public function testEmoji()
+    {
+        $country = new \Cromwell\ISO3166\Country(CodesByName::UNITED_KINGDOM, 'United Kingdom');
+        $this->assertEquals('🇬🇧', $country->emoji());
+    }
 }

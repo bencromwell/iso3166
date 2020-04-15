@@ -38,4 +38,8 @@ class Country implements \JsonSerializable
         ];
     }
 
+    public function emoji()
+    {
+        return OrdUtf8::emojiFlag($this->code);
+    }
 }
