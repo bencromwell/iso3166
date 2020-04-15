@@ -9,7 +9,7 @@ class EUTest extends TestCase
     public function testEU()
     {
         $eu = new \Cromwell\ISO3166\Subsets\EU();
-        $this->assertCount(28, $eu);
+        $this->assertCount(27, $eu);
 
         $this->assertNull($eu[CodesByName::UNITED_STATES]);
         $this->assertNotNull($eu[CodesByName::AUSTRIA]);
