@@ -24,7 +24,6 @@ class EU extends Countries
             self::SPAIN,
             self::FINLAND,
             self::FRANCE,
-            self::UNITED_KINGDOM,
             self::GREECE,
             self::HUNGARY,
             self::CROATIA,
