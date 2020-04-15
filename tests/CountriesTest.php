@@ -1,10 +1,10 @@
 <?php
 
 use Cromwell\ISO3166\CodesByName;
+use PHPUnit\Framework\TestCase;
 
-class CountriesTest extends PHPUnit_Framework_TestCase
+class CountriesTest extends TestCase
 {
-    
     const TOTAL_COUNTRIES = 246;
 
     public function testCountries()
@@ -35,5 +35,4 @@ class CountriesTest extends PHPUnit_Framework_TestCase
         $json = json_encode($countries);
         $this->assertEquals('{"AT":{"code":"AT","name":"Austria"}}', $json);
     }
-
 }

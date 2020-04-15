@@ -2,10 +2,11 @@
     "name": "cromwell/iso3166",
     "description": "A simple package for working with ISO-3166 country codes",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=7.4.0",
+        "ext-mbstring": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
+        "phpunit/phpunit": "^9.1",
         "codeclimate/php-test-reporter": "dev-master"
     },
     "autoload": {

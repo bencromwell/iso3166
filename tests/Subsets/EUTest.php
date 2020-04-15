@@ -1,8 +1,9 @@
 <?php
 
 use Cromwell\ISO3166\CodesByName;
+use PHPUnit\Framework\TestCase;
 
-class EUTest extends PHPUnit_Framework_TestCase
+class EUTest extends TestCase
 {
 
     public function testEU()
