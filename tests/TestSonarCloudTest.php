@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class TestSonarCloudTest extends TestCase
 {
-    public function testSonarCloudTest(): void
+    public function testSonarCloud()
     {
         $testSonarCloud = new TestSonarCloud('hello', 'world');
 

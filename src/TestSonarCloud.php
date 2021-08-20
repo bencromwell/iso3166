@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Cromwell\ISO3166;
 
 class TestSonarCloud
