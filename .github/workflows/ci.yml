@@ -19,9 +19,9 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
       - name: Run tests
         run: php vendor/bin/phpunit --coverage-clover clover.xml --coverage-text --coverage-xml covxml
-      - name: fix code coverage paths for SonarCloud
-        run: |
-          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' phpcov.xml
+#      - name: fix code coverage paths for SonarCloud
+#        run: |
+#          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' phpcov.xml
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
