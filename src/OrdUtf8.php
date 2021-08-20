@@ -15,8 +15,6 @@ class OrdUtf8
         $flag1 = mb_chr($firstChar, 'UTF-8');
         $flag2 = mb_chr($secondChar, 'UTF-8');
 
-        $flag = (string) $flag1 . (string) $flag2;
-
-        return $flag;
+        return (string) $flag1 . (string) $flag2;
     }
 }
