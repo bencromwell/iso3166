@@ -18,7 +18,5 @@
 
     <logging>
         <log type="coverage-html" target="./report" />
-        <!--<log type="junit" target="./junit.xml" />-->
-        <!--<log type="coverage-clover" target="./clover.xml" />-->
     </logging>
 </phpunit>
